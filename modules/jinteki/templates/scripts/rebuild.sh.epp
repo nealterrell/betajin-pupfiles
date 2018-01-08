@@ -25,7 +25,7 @@ function print_help {
   echo -e "    -k, --kill - if another rebuild is running in the background, don't stop, kill it instead"
   echo -e "    -c, --custom - specify custom build steps, by default makes the script do nothing"
   echo -e "  Available custom build steps (always executed in given order):"
-  echo -e "    --git-pull, --deps-install, --deps-prune, --cleanup, --stylus, --nrdb-fetch, --cljs-build,"
+  echo -e "    --git-pull, --deps-install, --cleanup, --stylus, --nrdb-fetch, --cljs-build,"
   echo -e "    --clj-build, --restart"
 
 }
@@ -57,9 +57,6 @@ while [[ $# -ge 1 ]]; do
       ;;
     '--deps-install')
       make_deps_install=true
-      ;;
-    '--deps-prune')
-      make_deps_prune=true
       ;;
     '--cleanup')
       make_cleanup=true
@@ -144,21 +141,10 @@ function step_deps_install {
   fi
 }
 
-function step_deps_prune {
-  logmsg "Pruning npm and bower packages..."
-  npm prune 2>&1 | tee -a $log_file
-  bower prune 2>&1 | tee -a $log_file
-}
-
 function step_nrdb_fetch {
   logmsg "Fetching card data from NRDB..."
-  npm run fetch 2>&1 | tee -a $log_file
-  npm run promo 2>&1 | tee -a $log_file
-  npm run rotate core 2>&1 | tee -a $log_file
-  npm run rotate genesis 2>&1 | tee -a $log_file
-  npm run rotate spin 2>&1 | tee -a $log_file
-  npm run link_cards 2>&1 | tee -a $log_file
-  npm run add_art  2>&1 | tee -a $log_file
+  lein fetch 2>&1 | tee -a $log_file
+  lein add_art 2>&1 | tee -a $log_file
 }
 
 function step_cleanup {
@@ -182,8 +168,7 @@ function step_clj_build {
 }
 
 function step_restart_services {
-  logmsg "Restarting services..."
-  sudo systemctl restart jinteki-site.service
+  logmsg "Restarting service..."
   sudo systemctl restart jinteki-game.service
 }
 
