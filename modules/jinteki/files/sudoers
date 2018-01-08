@@ -15,8 +15,3 @@ root ALL=(ALL) ALL
 %jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl stop jinteki-game.service
 %jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl start jinteki-game.service
 %jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl status jinteki-game.service
-
-%jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl restart jinteki-site.service
-%jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl stop jinteki-site.service
-%jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl start jinteki-site.service
-%jinteki ALL=(root) NOPASSWD: /usr/bin/systemctl status jinteki-site.service
