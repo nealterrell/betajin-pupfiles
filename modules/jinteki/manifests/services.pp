@@ -38,21 +38,6 @@ class jinteki::services {
     require => File['/etc/systemd/system/jinteki-game.service'],
   }
 
-  file {'/etc/systemd/system/jinteki-site.service':
-    content => epp('jinteki/systemd/jinteki-site.service.epp'),
-    owner => 'root',
-    group => 'root',
-    mode => '0644',
-  }
-
-  service {'jinteki-site':
-    ensure => running,
-    enable => true,
-    hasrestart => true,
-    hasstatus => true,
-    require => File['/etc/systemd/system/jinteki-site.service'],
-  }
-
   service {'cronie':
     ensure => running,
     enable => true,
