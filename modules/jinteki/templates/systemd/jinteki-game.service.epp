@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/java -jar target/netrunner-standalone.jar
+ExecStart=/usr/bin/java -jar target/netrunner-standalone.jar -XX:-OmitStackTraceInFastThrow
 PrivateDevices=yes
 User=jinteki
 WorkingDirectory=<%= "${jinteki::repodir}" %>
