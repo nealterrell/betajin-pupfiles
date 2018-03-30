@@ -21,14 +21,14 @@ http {
     server_name <%= $domain %>;
     keepalive_timeout 90s;
     location /js {
-      root /home/mtgred/netrunner/resources/public;
+      root <%= "${jinteki::repodir}" %>/resources/public;
    }
 
    location /img {
-      root /home/mtgred/netrunner/resources/public;
+      root <%= "${jinteki::repodir}" %>/resources/public;
    }
    location /css {
-      root /home/mtgred/netrunner/resources/public;
+      root <%= "${jinteki::repodir}" %>/resources/public;
    }
 
    location / {
