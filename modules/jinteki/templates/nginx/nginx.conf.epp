@@ -20,7 +20,22 @@ http {
     listen 80;
     server_name <%= $domain %>;
     keepalive_timeout 90s;
-    location / {
+    location /js {
+      root /home/mtgred/netrunner/resources/public;
+   }
+
+   location /img {
+      root /home/mtgred/netrunner/resources/public;
+   }
+   location /css {
+      root /home/mtgred/netrunner/resources/public;
+   }
+
+   location / {
+      try_files resources/public/$uri @proxy;
+   }
+
+   location @proxy {
       proxy_http_version 1.1;
       proxy_set_header Upgrade $http_upgrade;
       proxy_set_header Connection "upgrade";
