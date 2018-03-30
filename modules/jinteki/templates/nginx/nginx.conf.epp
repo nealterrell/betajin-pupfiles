@@ -20,19 +20,20 @@ http {
     listen 80;
     server_name <%= $domain %>;
     keepalive_timeout 90s;
+      
     location /js {
-      root <%= "${jinteki::repodir}" %>/resources/public;
+      root /opt/jinteki/resources/public;
    }
 
    location /img {
-      root <%= "${jinteki::repodir}" %>/resources/public;
+      root /opt/jinteki/resources/public;
    }
    location /css {
-      root <%= "${jinteki::repodir}" %>/resources/public;
+      root /opt/jinteki/resources/public;
    }
 
    location / {
-      try_files resources/public/$uri @proxy;
+      try_files /opt/jinteki/resources/public/$uri @proxy;
    }
 
    location @proxy {
